@@ -37,6 +37,7 @@ import java.util.concurrent.ExecutorService;
 
 import javax.net.ssl.SSLEngine;
 
+import com.liumapp.async.http.core.response.HttpResponseFuture;
 import com.liumapp.async.http.core.utils.HttpUtils;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.Channel;

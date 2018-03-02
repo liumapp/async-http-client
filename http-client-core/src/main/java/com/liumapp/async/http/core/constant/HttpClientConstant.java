@@ -42,6 +42,7 @@ public interface HttpClientConstant {
 
     final static HttpResponse TOO_LARGE = new DefaultHttpResponse(HTTP_1_1,
             new HttpResponseStatus(513, "body too large"));
+    
     final static HttpResponse TIMEOUT = new DefaultHttpResponse(HTTP_1_1,
             new HttpResponseStatus(520, "server timeout"));
 

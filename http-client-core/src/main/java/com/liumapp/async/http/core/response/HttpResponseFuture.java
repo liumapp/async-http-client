@@ -10,6 +10,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static com.liumapp.async.http.core.constant.HttpClientConstant.*;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.handler.codec.frame.TooLongFrameException;
 import org.jboss.netty.handler.codec.http.HttpRequest;
