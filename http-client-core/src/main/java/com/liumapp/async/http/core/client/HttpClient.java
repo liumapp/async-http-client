@@ -37,6 +37,7 @@ import java.util.concurrent.ExecutorService;
 
 import javax.net.ssl.SSLEngine;
 
+import com.liumapp.async.http.core.factory.PrefixThreadFactory;
 import com.liumapp.async.http.core.response.HttpResponseFuture;
 import com.liumapp.async.http.core.utils.HttpUtils;
 import org.jboss.netty.bootstrap.ClientBootstrap;
@@ -79,19 +80,19 @@ public class HttpClient implements HttpClientConstant {
         mConf = conf;
         setThreadNameDeterminer(CURRENT);
         ExecutorService boss = newCachedThreadPool(new PrefixThreadFactory(
-                conf.bossNamePrefix));
+                conf.getBossNamePrefix()));
         ExecutorService worker = newCachedThreadPool(new PrefixThreadFactory(
-                conf.workerNamePrefix));
+                conf.getWorkerNamePrefix()));
         NioClientSocketChannelFactory factory = new NioClientSocketChannelFactory(
-                boss, worker, conf.workerThread);
+                boss, worker, conf.getWorkerThread());
 
         mHttpsBootstrap = new ClientBootstrap(factory);
         mHttpsBootstrap.setPipelineFactory(new HttpsClientPipelineFactory(
-                mConf.maxLength, conf));
+                mConf.getMaxLength(), conf));
 
         mHttpBootstrap = new ClientBootstrap(factory);
         mHttpBootstrap.setPipelineFactory(new HttpClientPipelineFactory(
-                mConf.maxLength, conf));
+                mConf.getMaxLength(), conf));
 
         conf(mHttpBootstrap);
         conf(mHttpsBootstrap);
@@ -108,7 +109,7 @@ public class HttpClient implements HttpClientConstant {
         HttpRequest request = new DefaultHttpRequest(HTTP_1_1, method, path);
 
         request.setHeader(HOST, uri.getHost());
-        request.setHeader(USER_AGENT, mConf.userAgent);
+        request.setHeader(USER_AGENT, mConf.getUserAgent());
         request.setHeader(ACCEPT, "*/*");
         request.setHeader(ACCEPT_ENCODING, "gzip, deflate");
 
@@ -148,7 +149,7 @@ public class HttpClient implements HttpClientConstant {
     }
 
     private void checkTimeoutIfNeeded() {
-        if (currentTimeMillis() - mLastCheckTime > mConf.timerInterval) {
+        if (currentTimeMillis() - mLastCheckTime > mConf.getTimerInterval()) {
             // thread safe
             final Iterator<HttpResponseFuture> it = mFutures.iterator();
             while (it.hasNext()) {
@@ -168,9 +169,9 @@ public class HttpClient implements HttpClientConstant {
 
     private void conf(ClientBootstrap bootstrap) {
         bootstrap.setOption("connectTimeoutMillis",
-                mConf.connectionTimeOutInMs);
-        bootstrap.setOption("receiveBufferSize", mConf.receiveBuffer);
-        bootstrap.setOption("sendBufferSize", mConf.sendBuffer);
+                mConf.getConnectionTimeOutInMs());
+        bootstrap.setOption("receiveBufferSize", mConf.getReceiveBuffer());
+        bootstrap.setOption("sendBufferSize", mConf.getSendBuffer());
         bootstrap.setOption("reuseAddress", true);
     }
 
@@ -208,7 +209,7 @@ public class HttpClient implements HttpClientConstant {
             proxy = Proxy.NO_PROXY;
         }
         final HttpResponseFuture future = new HttpResponseFuture(
-                mConf.requestTimeoutInMs, request);
+                mConf.getRequestTimeoutInMs(), request);
         boolean ssl = "https".equals(uri.getScheme());
 
         try {

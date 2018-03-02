@@ -28,6 +28,54 @@ public class HttpClientConfig {
     public HttpClientConfig() {
     }
 
+    public List<String> getAcceptedContentTypes() {
+        return acceptedContentTypes;
+    }
+
+    public String getBossNamePrefix() {
+        return bossNamePrefix;
+    }
+
+    public int getConnectionTimeOutInMs() {
+        return connectionTimeOutInMs;
+    }
+
+    public int getMaxChunkSize() {
+        return maxChunkSize;
+    }
+
+    public int getMaxLength() {
+        return maxLength;
+    }
+
+    public int getReceiveBuffer() {
+        return receiveBuffer;
+    }
+
+    public int getSendBuffer() {
+        return sendBuffer;
+    }
+
+    public int getRequestTimeoutInMs() {
+        return requestTimeoutInMs;
+    }
+
+    public int getTimerInterval() {
+        return timerInterval;
+    }
+
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public String getWorkerNamePrefix() {
+        return workerNamePrefix;
+    }
+
+    public int getWorkerThread() {
+        return workerThread;
+    }
+
     public void setAcceptedContentTypes(List<String> acceptedContentTypes) {
         this.acceptedContentTypes = acceptedContentTypes;
     }
