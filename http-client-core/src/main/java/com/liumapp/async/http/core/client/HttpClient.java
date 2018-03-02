@@ -36,6 +36,7 @@ import java.util.concurrent.ExecutorService;
 
 import javax.net.ssl.SSLEngine;
 
+import com.liumapp.async.http.core.utils.HttpUtils;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFuture;
@@ -99,7 +100,7 @@ public class HttpClient implements HttpClientConstant {
                                      Map<String, Object> headers, Map<String, Object> params,
                                      Proxy proxy) {
 
-        String path = proxy.type() == Type.HTTP ? uri.toString() : Utils
+        String path = proxy.type() == Type.HTTP ? uri.toString() : HttpUtils
                 .getPath(uri);
 
         HttpRequest request = new DefaultHttpRequest(HTTP_1_1, method, path);
