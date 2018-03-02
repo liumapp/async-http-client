@@ -30,6 +30,6 @@
 
 	<modules>
 		<module>http-client-core</module>
-    <module>http-client-demo</module>
-  </modules>
+    	<module>http-client-demo</module>
+    </modules>
 </project>
