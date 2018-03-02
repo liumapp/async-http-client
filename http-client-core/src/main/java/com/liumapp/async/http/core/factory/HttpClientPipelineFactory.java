@@ -1,8 +1,12 @@
 package com.liumapp.async.http.core.factory;
 
 import com.liumapp.async.http.core.config.HttpClientConfig;
+import com.liumapp.async.http.core.response.ResponseHandler;
+import com.liumapp.async.http.core.utils.Decoder;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.ChannelPipeline;
+import org.jboss.netty.handler.codec.http.HttpChunkAggregator;
+import org.jboss.netty.handler.codec.http.HttpRequestEncoder;
 
 /**
  * Created by liumapp on 3/2/18.

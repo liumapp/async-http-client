@@ -32,9 +32,9 @@ public class Decoder extends HttpResponseDecoder {
             String type = msg.getHeader(CONTENT_TYPE);
             if (getContentLength(msg) > conf.getMaxLength()) {
                 future.done(TOO_LARGE);
-            } else if (type != null && conf.acceptedContentTypes != null) {
+            } else if (type != null && conf.getAcceptedContentTypes() != null) {
                 boolean accept = false;
-                for (String t : conf.acceptedContentTypes) {
+                for (String t : conf.getAcceptedContentTypes()) {
                     if (type.contains(t)) {
                         accept = true;
                         break;
@@ -49,7 +49,7 @@ public class Decoder extends HttpResponseDecoder {
     }
 
     public Decoder(HttpClientConfig conf) {
-        super(4096, 8192, conf.maxChunkSize);
+        super(4096, 8192, conf.getMaxChunkSize());
         this.conf = conf;
     }
 }
