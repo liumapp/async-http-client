@@ -1,5 +1,6 @@
 package com.liumapp.async.http.core.client;
 
+import com.liumapp.async.http.core.config.HttpClientConfig;
 import com.liumapp.async.http.core.constant.HttpClientConstant;
 
 import static java.lang.System.currentTimeMillis;
